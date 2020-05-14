@@ -11,6 +11,9 @@ class _AfterSplashState extends State<AfterSplash> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+   final double itemHeight=130.0;
+   final double itemWidth=size.width/2;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -26,8 +29,8 @@ class _AfterSplashState extends State<AfterSplash> {
           Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
             child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -156,7 +159,17 @@ class _AfterSplashState extends State<AfterSplash> {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: Text(
+                      "Prevention",
+                      style: GoogleFonts.ubuntu(
+                          fontSize: 22.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ),
                 ],
               ),
             ),

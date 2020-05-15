@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   splashscreen: ^1.2.0
   google_fonts: ^1.0.0
+  http: ^0.12.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,6 +47,14 @@ flutter:
   assets:
     - images/bacteria.png
     - images/cov_back.jpg
+    - images/page_bg.jpg
+    - images/cough.png
+    - images/distance.png
+    - images/hands.png
+    - images/mask.png
+    - images/page_bg.jpg
+    - images/spray.png
+    - images/home.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

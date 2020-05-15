@@ -1,18 +1,101 @@
+import 'package:corona_tracker/ui/countryscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../network.dart';
+import 'home_screen.dart';
+
 class AfterSplash extends StatefulWidget {
+
+  final country;
+  final global;
+
+  AfterSplash({this.country,this.global});
+
   @override
   _AfterSplashState createState() => _AfterSplashState();
 }
 
 class _AfterSplashState extends State<AfterSplash> {
+
+  String countrydata;
+  int cases;
+  int recovered;
+  int death;
+  int todaycases;
+  int todaydeath;
+
+  int globalcases;
+  int globalrecovered;
+  int globaldeath;
+  int globaltodaycases;
+  int globaltodaydeath;
+
+  void updateUi(dynamic countryData){
+    countrydata=countryData['country'];
+    cases=countryData['cases'];
+    recovered=countryData['recovered'];
+    death=countryData['deaths'];
+    todaycases=countryData['todayCases'];
+    todaydeath=countryData['todayDeaths'];
+
+  }
+
+
+  void updateUiCountry(dynamic countryData){
+
+    setState(() {
+      countrydata=countryData['country'];
+      cases=countryData['cases'];
+      recovered=countryData['recovered'];
+      death=countryData['deaths'];
+      todaycases=countryData['todayCases'];
+      todaydeath=countryData['todayDeaths'];
+    });
+
+
+  }
+
+  void updateUiGlobal(dynamic countryData){
+
+    globalcases=countryData['cases'];
+    globalrecovered=countryData['recovered'];
+    globaldeath=countryData['deaths'];
+    globaltodaycases=countryData['todayCases'];
+    globaltodaydeath=countryData['todayDeaths'];
+
+  }
+
+
+
+  void getCountryData(String countryName) async {
+    NetworkHelper networkHelper = NetworkHelper(
+        url:
+        'https://disease.sh/v2/countries/$countryName?yesterday=false&strict=true');
+
+    var countryData = await networkHelper.getData();
+
+    updateUiCountry(countryData);
+
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    updateUi(widget.country);
+    updateUiGlobal(widget.global);
+    updateUiCountry(widget.country);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-   final double itemHeight=130.0;
-   final double itemWidth=size.width/2;
+    final double itemHeight = 150.0;
+    final double itemWidth = size.width / 2;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -23,14 +106,14 @@ class _AfterSplashState extends State<AfterSplash> {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/cov_back.jpg"),
+                    image: AssetImage("images/page_bg.jpg"),
                     fit: BoxFit.cover)),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0),
             child: SafeArea(
-              child: ListView(
-                //crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -44,12 +127,21 @@ class _AfterSplashState extends State<AfterSplash> {
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Bangladesh",
-                        style: GoogleFonts.ubuntu(
-                            fontSize: 22.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600),
+                      FlatButton(
+                        onPressed:()async{
+                          var typesCountry=await Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return CountryScreen();
+                          }));
+
+                          getCountryData(typesCountry);
+                        },
+                        child: Text(
+                          '$countrydata',
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 22.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                       Icon(
                         Icons.keyboard_arrow_down,
@@ -86,29 +178,28 @@ class _AfterSplashState extends State<AfterSplash> {
                       children: <Widget>[
                         Grid(
                           title: "Confirmed",
-                          no: "5000",
+                          no: '$cases',
                           color: 0xff2AA847,
                           icon: Icons.arrow_upward,
-                          today: "25",
+                          today: '$todaycases',
                         ),
                         Grid(
                           title: "Recovered",
-                          no: "1200",
+                          no: '$recovered',
                           color: 0xff077eff,
                           icon: Icons.arrow_upward,
-                          today: "120",
+                          today: "",
                         ),
                         Grid(
                           title: "Death",
-                          no: "290",
+                          no: '$death',
                           color: 0xffFe083b,
                           icon: Icons.arrow_downward,
-                          today: "19",
+                          today: '$todaydeath',
                         ),
                       ],
                     ),
                   ),
-
                   SizedBox(
                     height: 20.0,
                   ),
@@ -138,24 +229,24 @@ class _AfterSplashState extends State<AfterSplash> {
                       children: <Widget>[
                         Grid(
                           title: "Confirmed",
-                          no: "5000",
+                          no: '$globalcases',
                           color: 0xff2AA847,
                           icon: Icons.arrow_upward,
-                          today: "25",
+                          today: '$globaltodaycases',
                         ),
                         Grid(
                           title: "Recovered",
-                          no: "1200",
+                          no: '$globalrecovered',
                           color: 0xff077eff,
                           icon: Icons.arrow_upward,
-                          today: "120",
+                          today: "",
                         ),
                         Grid(
                           title: "Death",
-                          no: "290",
+                          no: '$globaldeath',
                           color: 0xffFe083b,
                           icon: Icons.arrow_downward,
-                          today: "19",
+                          today: '$globaltodaydeath',
                         ),
                       ],
                     ),
@@ -170,10 +261,48 @@ class _AfterSplashState extends State<AfterSplash> {
                           color: Colors.black),
                     ),
                   ),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: itemWidth / itemHeight,
+                      children: <Widget>[
+                        Prevention(title: "Cover your cough",image: "images/cough.png",),
+                        Prevention(title: "Wear a mask",image: "images/mask.png",),
+                        Prevention(title: "Keep safe distance",image: "images/distance.png",),
+                        Prevention(title: "Wash your hands",image: "images/hands.png",),
+                        Prevention(title: "Use hand wash",image: "images/spray.png",),
+                        Prevention(title: "Stay home",image: "images/home.png",)
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class Prevention extends StatelessWidget {
+
+  final String title;
+  final String image;
+
+  Prevention({this.title,this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Image.asset(image),
+          Text(
+            title,
+            style:
+                GoogleFonts.ubuntu(fontSize: 12.0, fontWeight: FontWeight.w500),
+          )
         ],
       ),
     );
@@ -205,7 +334,7 @@ class Grid extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             no,
-            style: GoogleFonts.ubuntu(fontSize: 35.0, color: Color(color)),
+            style: GoogleFonts.ubuntu(fontSize: 25.0, color: Color(color)),
           ),
         ),
         Padding(

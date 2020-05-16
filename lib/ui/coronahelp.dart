@@ -39,6 +39,18 @@ class _CoronaHelpScreenState extends State<CoronaHelpScreen> {
               ),
             ],
           ),
+
+          SizedBox(
+            height: 10.0,
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("**নাম্বার সমূহে ক্লিক করে ফোন করুন"),
+            ],
+          ),
+
           BoldText("সর্দি-কাশি ও জ্বরে চিকিৎসকের পরামর্শ"),
           Row(
             children: <Widget>[

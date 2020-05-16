@@ -295,6 +295,38 @@ class _AfterSplashState extends State<AfterSplash> {
                 ],
               ),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0,top: 10.0),
+              child: Text(
+                "Symptoms",
+                style: GoogleFonts.ubuntu(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Container(
+              height: 200.0,
+              child: GridView.count(
+                crossAxisCount: 3,
+                childAspectRatio: itemWidth / itemHeight,
+                children: <Widget>[
+                  Symptoms(title: "Hard cough",image: "images/hardcough.png",),
+                  Symptoms(title: "Fever",image: "images/fever.png",),
+                  Symptoms(title: "Soar throat",image: "images/soarthroat.png",),
+                  Symptoms(title: "Musscle Pain",image: "images/mussclepain.png",),
+                  Symptoms(title: "Short Breath",image: "images/shortbreath.png",),
+                  Symptoms(title: "loss of taste or smell",image: "images/nosmell.png",),
+
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 10.0,top: 10.0),
               child: Text(
@@ -307,7 +339,7 @@ class _AfterSplashState extends State<AfterSplash> {
             ),
 
             Container(
-              height: 250.0,
+              height: 220.0,
               child: GridView.count(
                 crossAxisCount: 3,
                 childAspectRatio: itemWidth / itemHeight,
@@ -320,7 +352,10 @@ class _AfterSplashState extends State<AfterSplash> {
                   Prevention(title: "Stay home",image: "images/home.png",)
                 ],
               ),
-            )
+            ),
+
+
+
 
           ],
         ),
@@ -345,6 +380,34 @@ class Prevention extends StatelessWidget {
             title,
             style:
                 GoogleFonts.ubuntu(fontSize: 12.0, fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+class Symptoms extends StatelessWidget {
+  final String title;
+  final String image;
+
+  Symptoms({this.title, this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(image,height: 50.0,width: 50.0,),
+          SizedBox(
+            height: 4.0,
+          ),
+          Text(
+            title,
+            style:
+            GoogleFonts.ubuntu(fontSize: 12.0, fontWeight: FontWeight.w500),
           )
         ],
       ),

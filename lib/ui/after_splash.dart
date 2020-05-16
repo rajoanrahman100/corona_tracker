@@ -88,6 +88,9 @@ class _AfterSplashState extends State<AfterSplash> {
     updateUiCountry(widget.country);
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -95,271 +98,272 @@ class _AfterSplashState extends State<AfterSplash> {
     final double itemHeight = 150.0;
     final double itemWidth = size.width / 2;
 
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        leading: IconButton(icon:Icon(Icons.question_answer,color: Colors.red,),
-          onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
-                  return FAQPage();
-                }));
-          },
-        ),
-        title: Text("Covid-19 Tracker",style: GoogleFonts.ubuntu(
-          fontWeight: FontWeight.w500,
-          color: Colors.redAccent
-        ),),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right:8.0),
-            child: GestureDetector(onTap:(){
+    return  Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          leading: IconButton(icon:Icon(Icons.question_answer,color: Colors.red,),
+            onPressed: (){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) {
-                    return CoronaHelpScreen();
+                    return FAQPage();
                   }));
-            },child: Icon(Icons.help,color: Colors.redAccent,)),
-          )
-        ],
-      ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Container(
-              height: size.height * .35,
-              width: double.infinity,
-              /*decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("images/corona.jpg"),
-                          fit: BoxFit.cover))*/
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "Select a country",
-                      style: GoogleFonts.ubuntu(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      FlatButton(
-                        onPressed: () async {
-                          var typesCountry = await Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return CountryScreen();
-                          }));
-
-                          getCountryData(typesCountry);
-                        },
-                        child: Text(
-                          '$countrydata',
-                          style: GoogleFonts.ubuntu(
-                              fontSize: 24.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.black,
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Text(
-                      "Last Update 1 hour ago",
-                      style: GoogleFonts.ubuntu(
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.grey),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 5.0,
-                              spreadRadius: 0.1,
-                              offset: Offset(2, 2))
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        GridBD(
-                          title: "Confirmed",
-                          no: '$cases',
-                          color: 0xff2AA847,
-                          icon: Icons.arrow_upward,
-                          today: '$todaycases',
-                        ),
-                        GridBD(
-                          title: "Recovered",
-                          no: '$recovered',
-                          color: 0xff077eff,
-                          icon: Icons.arrow_upward,
-                          today: "",
-                        ),
-                        GridBD(
-                          title: "Death",
-                          no: '$death',
-                          color: 0xffFe083b,
-                          icon: Icons.arrow_downward,
-                          today: '$todaydeath',
-                        ),
-                        GridBD(
-                          title: "TotalTests",
-                          no: '$totaltests',
-                          color: 0xff077eff,
-                          icon: Icons.arrow_forward,
-                          today: '$testPerMill',
-                        ),
-
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
+            },
+          ),
+          title: Text("Covid-19 Tracker",style: GoogleFonts.ubuntu(
+            fontWeight: FontWeight.w500,
+            color: Colors.redAccent
+          ),),
+          actions: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(
-                "Global Outbreak",
-                style: GoogleFonts.ubuntu(
-                    fontSize: 22.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            SizedBox(
-              height: 15.0,
-            ),
-            Container(
-             height: 110,
-              margin: EdgeInsets.symmetric(horizontal: 10.0),
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5.0,
-                        spreadRadius: 0.1,
-                        offset: Offset(2, 2))
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Grid(
-                    title: "Confirmed",
-                    no: '$globalcases',
-                    color: 0xff2AA847,
-                    icon: Icons.arrow_upward,
-                    today: '$globaltodaycases',
-                  ),
-                  Grid(
-                    title: "Recovered",
-                    no: '$globalrecovered',
-                    color: 0xff077eff,
-                    icon: Icons.arrow_upward,
-                    today: "",
-                  ),
-                  Grid(
-                    title: "Death",
-                    no: '$globaldeath',
-                    color: 0xffFe083b,
-                    icon: Icons.arrow_downward,
-                    today: '$globaltodaydeath',
-                  ),
-                  Grid(
-                    title: "TotalTests",
-                    no: '$globalTest',
-                    color: 0xff077eff,
-                    icon: Icons.arrow_forward,
-                    today: '$globalTestPerMill',
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0,top: 10.0),
-              child: Text(
-                "Symptoms",
-                style: GoogleFonts.ubuntu(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Container(
-              height: 200.0,
-              child: GridView.count(
-                crossAxisCount: 3,
-                childAspectRatio: itemWidth / itemHeight,
-                children: <Widget>[
-                  Symptoms(title: "Hard cough",image: "images/hardcough.png",),
-                  Symptoms(title: "Fever",image: "images/fever.png",),
-                  Symptoms(title: "Soar throat",image: "images/soarthroat.png",),
-                  Symptoms(title: "Musscle Pain",image: "images/mussclepain.png",),
-                  Symptoms(title: "Short Breath",image: "images/shortbreath.png",),
-                  Symptoms(title: "loss of taste or smell",image: "images/nosmell.png",),
-
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0,top: 10.0),
-              child: Text(
-                "Prevention",
-                style: GoogleFonts.ubuntu(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
-              ),
-            ),
-
-            Container(
-              height: 220.0,
-              child: GridView.count(
-                crossAxisCount: 3,
-                childAspectRatio: itemWidth / itemHeight,
-                children: <Widget>[
-                  Prevention(title: "Cover your cough",image: "images/cough.png",),
-                  Prevention(title: "Wear a mask",image: "images/mask.png",),
-                  Prevention(title: "Keep safe distance",image: "images/distance.png",),
-                  Prevention(title: "Wash your hands",image: "images/hands.png",),
-                  Prevention(title: "Use hand wash",image: "images/spray.png",),
-                  Prevention(title: "Stay home",image: "images/home.png",)
-                ],
-              ),
-            ),
-
-
-
-
+              padding: const EdgeInsets.only(right:8.0),
+              child: GestureDetector(onTap:(){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) {
+                      return CoronaHelpScreen();
+                    }));
+              },child: Icon(Icons.help,color: Colors.redAccent,)),
+            )
           ],
         ),
-      ),
+        body: Container(
+          child: ListView(
+            children: <Widget>[
+              Container(
+                height: size.height * .35,
+                width: double.infinity,
+                /*decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("images/corona.jpg"),
+                            fit: BoxFit.cover))*/
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Select a country",
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () async {
+                            var typesCountry = await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return CountryScreen();
+                            }));
+
+                            getCountryData(typesCountry);
+                          },
+                          child: Text(
+                            '$countrydata',
+                            style: GoogleFonts.ubuntu(
+                                fontSize: 24.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "Last Update 1 hour ago",
+                        style: GoogleFonts.ubuntu(
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10.0),
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 5.0,
+                                spreadRadius: 0.1,
+                                offset: Offset(2, 2))
+                          ],
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          GridBD(
+                            title: "Confirmed",
+                            no: '$cases',
+                            color: 0xff2AA847,
+                            icon: Icons.arrow_upward,
+                            today: '$todaycases',
+                          ),
+                          GridBD(
+                            title: "Recovered",
+                            no: '$recovered',
+                            color: 0xff077eff,
+                            icon: Icons.arrow_upward,
+                            today: "",
+                          ),
+                          GridBD(
+                            title: "Death",
+                            no: '$death',
+                            color: 0xffFe083b,
+                            icon: Icons.arrow_downward,
+                            today: '$todaydeath',
+                          ),
+                          GridBD(
+                            title: "TotalTests",
+                            no: '$totaltests',
+                            color: 0xff077eff,
+                            icon: Icons.arrow_forward,
+                            today: '$testPerMill',
+                          ),
+
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text(
+                  "Global Outbreak",
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 22.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              SizedBox(
+                height: 15.0,
+              ),
+              Container(
+               height: 110,
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          spreadRadius: 0.1,
+                          offset: Offset(2, 2))
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Grid(
+                      title: "Confirmed",
+                      no: '$globalcases',
+                      color: 0xff2AA847,
+                      icon: Icons.arrow_upward,
+                      today: '$globaltodaycases',
+                    ),
+                    Grid(
+                      title: "Recovered",
+                      no: '$globalrecovered',
+                      color: 0xff077eff,
+                      icon: Icons.arrow_upward,
+                      today: "",
+                    ),
+                    Grid(
+                      title: "Death",
+                      no: '$globaldeath',
+                      color: 0xffFe083b,
+                      icon: Icons.arrow_downward,
+                      today: '$globaltodaydeath',
+                    ),
+                    Grid(
+                      title: "TotalTests",
+                      no: '$globalTest',
+                      color: 0xff077eff,
+                      icon: Icons.arrow_forward,
+                      today: '$globalTestPerMill',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0,top: 10.0),
+                child: Text(
+                  "Symptoms",
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                height: 200.0,
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  childAspectRatio: itemWidth / itemHeight,
+                  children: <Widget>[
+                    Symptoms(title: "Hard cough",image: "images/hardcough.png",),
+                    Symptoms(title: "Fever",image: "images/fever.png",),
+                    Symptoms(title: "Soar throat",image: "images/soarthroat.png",),
+                    Symptoms(title: "Musscle Pain",image: "images/mussclepain.png",),
+                    Symptoms(title: "Short Breath",image: "images/shortbreath.png",),
+                    Symptoms(title: "loss of taste or smell",image: "images/nosmell.png",),
+
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0,top: 10.0),
+                child: Text(
+                  "Prevention",
+                  style: GoogleFonts.ubuntu(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black),
+                ),
+              ),
+
+              Container(
+                height: 220.0,
+                child: GridView.count(
+                  crossAxisCount: 3,
+                  childAspectRatio: itemWidth / itemHeight,
+                  children: <Widget>[
+                    Prevention(title: "Cover your cough",image: "images/cough.png",),
+                    Prevention(title: "Wear a mask",image: "images/mask.png",),
+                    Prevention(title: "Keep safe distance",image: "images/distance.png",),
+                    Prevention(title: "Wash your hands",image: "images/hands.png",),
+                    Prevention(title: "Use hand wash",image: "images/spray.png",),
+                    Prevention(title: "Stay home",image: "images/home.png",)
+                  ],
+                ),
+              ),
+
+
+
+
+            ],
+          ),
+        ),
+
     );
   }
 }

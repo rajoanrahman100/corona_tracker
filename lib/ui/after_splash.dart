@@ -1,4 +1,5 @@
 import 'package:corona_tracker/ui/countryscreen.dart';
+import 'package:corona_tracker/ui/faqs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,6 +100,14 @@ class _AfterSplashState extends State<AfterSplash> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
+        leading: IconButton(icon:Icon(Icons.question_answer,color: Colors.red,),
+          onPressed: (){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
+                  return FAQPage();
+                }));
+          },
+        ),
         title: Text("Covid-19 Tracker",style: GoogleFonts.ubuntu(
           fontWeight: FontWeight.w500,
           color: Colors.redAccent

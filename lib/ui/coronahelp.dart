@@ -29,7 +29,7 @@ class _CoronaHelpScreenState extends State<CoronaHelpScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: Text(
-                      "প্রইয়োজনীয় নাম্বার সমূহ",
+                      "প্রয়োজনীয় নাম্বার সমূহ",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.w500),

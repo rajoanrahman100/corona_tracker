@@ -131,12 +131,8 @@ class _AfterSplashState extends State<AfterSplash> {
           child: ListView(
             children: <Widget>[
               Container(
-                height: size.height * .35,
+                height: size.height * .30,
                 width: double.infinity,
-                /*decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/corona.jpg"),
-                            fit: BoxFit.cover))*/
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -299,7 +295,7 @@ class _AfterSplashState extends State<AfterSplash> {
                 ),
               ),
               SizedBox(
-                height: 10.0,
+                height: 20.0,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 10.0,top: 10.0),
@@ -318,6 +314,7 @@ class _AfterSplashState extends State<AfterSplash> {
                 height: 200.0,
                 child: GridView.count(
                   crossAxisCount: 3,
+                  physics: NeverScrollableScrollPhysics(),
                   childAspectRatio: itemWidth / itemHeight,
                   children: <Widget>[
                     Symptoms(title: "Hard cough",image: "images/hardcough.png",),
@@ -345,6 +342,7 @@ class _AfterSplashState extends State<AfterSplash> {
                 height: 220.0,
                 child: GridView.count(
                   crossAxisCount: 3,
+                  physics: NeverScrollableScrollPhysics(),
                   childAspectRatio: itemWidth / itemHeight,
                   children: <Widget>[
                     Prevention(title: "Cover your cough",image: "images/cough.png",),
@@ -513,7 +511,7 @@ class GridBD extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Text(
             no,
-            style: GoogleFonts.ubuntu(fontSize: 18.0, color: Color(color)),
+            style: GoogleFonts.ubuntu(fontSize: 16.0, color: Color(color)),
           ),
         ),
         Padding(

@@ -1,10 +1,15 @@
 # Crona Tracker
 
-A new Flutter application.
 
 ## About
 
-Corona tracing application to get the result everyday in real time for the searched country.
+An application to get the result everyday in real time for the searched country.
+
+## Packages I've used
+<p> 1. google_fonts </p>
+<p> 2. http </p>
+<p> 3. url_launcher </p>
+<p> 4. connectivity </p>
 
 ## ScreenShot 
 

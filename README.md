@@ -1,4 +1,4 @@
-# Crona Tracker
+# Corona Tracker
 
 
 ## About
